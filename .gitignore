@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+*.pot
+*.pyc
+
+# Django
+*.sqlite3
+db.sqlite3
+*.mo
+local_settings.py
+.env
+.env.*
+
+# migrations
+**/migrations/
+!*/migrations/__init__.py
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Static/media
+/static/
+/media/
+/assets/
+/node_modules/
+/build/
+/dist/
+
+# Tailwind + PostCSS
+*.css.map
+*.js.map
+output.css
+
+# npm/poetry
+package-lock.json
+poetry.lock
+
+# OS junk
+Thumbs.db
+ehthumbs.db
