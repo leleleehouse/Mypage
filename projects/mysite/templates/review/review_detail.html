@@ -1,0 +1,6 @@
+{% extends "pybo/base.html" %}
+{% block title %}{{ review.title }}{% endblock %}
+
+{% block content %}
+  {% include "components/detail_block.html" with title=review.title link=review.link content_html=review_html created_at=review.created_at back_url="review:index" create_url="review:create" update_url="review:update" update_pk=review.pk delete_url="review:delete" delete_pk=review.pk prev_url="review:detail" prev_pk=prev.pk next_url="review:detail" next_pk=next.pk%}
+{% endblock %}

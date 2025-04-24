@@ -1,0 +1,53 @@
+<section class="max-w-3xl mx-auto bg-white px-8 py-6 rounded-md">
+    <!-- 상단 링크 -->
+    <div class="mb-6 border-b pb-2 flex justify-between items-center">
+      <a href="{% url back_url %}" class="text-sm text-gray-500 hover:text-blue-500">← 목록으로</a>
+      {% if request.session.is_admin and create_url %}
+        <a href="{% url create_url %}" class="text-sm text-blue-600 hover:underline">+ 새로 작성</a>
+      {% endif %}
+    </div>
+  
+    <!-- 제목 -->
+    <h1 class="text-4xl font-bold text-gray-900 leading-tight mb-2">{{ title }}</h1>
+  
+    <!-- 링크 -->
+    {% if link %}
+      <p class="mb-6 text-sm text-blue-700">
+        🔗 <a href="{{ link }}" target="_blank" class="hover:underline">링크 보기</a>
+      </p>
+    {% endif %}
+  
+    <!-- 본문 -->
+    <article class="prose max-w-none prose-lg">
+      {{ content_html|safe }}
+    </article>
+  
+    <!-- ✅ extra_block 위치 이동: 본문 아래 -->
+    {% if extra_html %}
+    <div class="mt-6">
+        {{ extra_html|safe }}
+    </div>
+    {% endif %}
+  
+    <!-- 작성일 -->
+    <p class="text-xs text-gray-400 mt-12">작성일: {{ created_at|date:"Y년 m월 d일 H:i" }}</p>
+  
+    <!-- 수정/삭제 -->
+    {% if request.session.is_admin and update_url and update_pk and delete_url and delete_pk %}
+      <div class="flex gap-3 mt-6 justify-end">
+        <a href="{% url update_url update_pk %}" class="text-sm px-4 py-2 bg-yellow-400 text-white rounded hover:bg-yellow-500">✏️ 수정</a>
+        <a href="{% url delete_url delete_pk %}" class="text-sm px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">🗑 삭제</a>
+      </div>
+    {% endif %}
+  
+    <!-- 이전/다음 -->
+    <div class="flex justify-between items-center mt-12 border-t pt-6 text-sm text-blue-500">
+      {% if prev_url and prev_pk %}
+        <a href="{% url prev_url prev_pk %}" class="hover:underline">← 이전</a>
+      {% else %}<span></span>{% endif %}
+      {% if next_url and next_pk %}
+        <a href="{% url next_url next_pk %}" class="hover:underline">다음 →</a>
+      {% else %}<span></span>{% endif %}
+    </div>
+  </section>
+  

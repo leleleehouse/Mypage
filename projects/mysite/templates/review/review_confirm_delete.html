@@ -1,0 +1,25 @@
+{% extends "pybo/base.html" %}
+{% block title %}리뷰 삭제{% endblock %}
+
+{% block content %}
+  <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow text-center">
+    <h1 class="text-2xl font-bold mb-4 text-red-600">⚠️ 리뷰 삭제</h1>
+
+    <p class="mb-6 text-gray-700">
+      정말로 <strong>"{{ object.title }}"</strong> 리뷰를 삭제하시겠습니까?
+      <br>이 작업은 되돌릴 수 없습니다.
+    </p>
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="flex justify-center gap-4">
+        <a href="{% url 'review:detail' object.pk %}" class="px-4 py-2 bg-gray-300 text-sm rounded hover:bg-gray-400">
+          취소
+        </a>
+        <button type="submit" class="px-4 py-2 bg-red-500 text-white text-sm rounded hover:bg-red-600">
+          삭제하기
+        </button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

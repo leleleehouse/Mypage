@@ -1,0 +1,56 @@
+<!-- templates/base.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}내 포트폴리오{% endblock %}</title>
+  
+  <link href="{% static 'css/output.css' %}" rel="stylesheet">
+  {% block extrahead %}{% endblock %}
+</head>
+<!-- Toast UI Editor CSS -->
+<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+
+<!-- Toast UI Editor JS -->
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+
+<body class="bg-gray-100 text-gray-900 min-h-screen">
+<!-- 공통 레이아웃 -->
+ <!-- ✅ 네비게이션 바 -->
+ <nav class="bg-white shadow mb-8">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="text-xl font-bold">
+        <a href="{% url 'home:home' %}" class="hover:text-blue-600">다현 Lee</a>
+      </div>
+      <ul class="flex space-x-6 text-sm font-medium">
+        <li><a href="{% url 'home:home' %}" class="hover:text-blue-500">About Me</a></li>
+        <li><a href="{% url 'pybo:index' %}" class="hover:text-blue-500">Project</a></li>
+        <li><a href="{% url 'review:index' %}" class="hover:text-blue-500">Review</a></li>
+        <li><a href="{% url 'contact:contact' %}" class="hover:text-blue-500">Contact Me</a></li>
+        <li><a href="{% url 'history:history' %}" class="hover:text-blue-500">History</a></li>
+      </ul>
+       <!-- 관리자 로그인/로그아웃 버튼 -->
+    <div>
+      {% if request.session.is_admin %}
+        <a href="{% url 'pybo:logout' %}" class="text-sm text-red-500 hover:underline">
+          🔓 로그아웃
+        </a>
+      {% else %}
+        <a href="{% url 'pybo:auth' %}" class="text-sm text-gray-500 hover:text-blue-500">
+          🔐 관리자 로그인
+        </a>
+      {% endif %}
+    </div>
+    </div>
+  </nav>
+  <div class="max-w-6xl mx-auto px-4">
+    {% block content %}
+    <!-- 여기에 개별 페이지 내용이 들어감 -->
+    {% endblock %}
+  </div>
+</body>
+</html>

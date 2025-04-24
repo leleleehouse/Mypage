@@ -1,0 +1,32 @@
+<div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+    <!-- 카드 전체 링크 영역 -->
+    <a href="{% url 'pybo:detail' project.id %}" class="block">
+      {% if project.project_img %}
+        <img src="{{ project.project_img.url }}"
+             alt="{{ project.title }}"
+             class="w-full h-48 object-cover rounded mb-4">
+      {% endif %}
+  
+      <h2 class="text-xl font-semibold mb-2">{{ project.title }}</h2>
+  
+    </a>
+  
+    <!-- 외부 GitHub 링크 -->
+    {% if project.github_url %}
+      <a href="{{ project.github_url }}"
+         class="text-blue-600 hover:underline text-sm mt-2 inline-block"
+         target="_blank">
+        🔗 GitHub 보기
+      </a>
+    {% endif %}
+  
+    <!-- 기술 스택 태그 -->
+    <div class="mt-2 text-sm text-gray-500">
+      {% for tag in project.tech_stack_tag.all %}
+        <span class="inline-block bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-xs mr-1">
+          {{ tag.name }}
+        </span>
+      {% endfor %}
+    </div>
+  </div>
+  

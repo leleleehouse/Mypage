@@ -1,0 +1,30 @@
+{% extends "pybo/base.html" %}
+{% block title %}논문 리뷰 목록{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto p-6">
+  <div class="flex justify-between items-center mb-6 border-b pb-4">
+    <h1 class="text-2xl font-bold">📚 논문 리뷰 목록</h1>
+    {% if request.session.is_admin %}
+    <a href="{% url 'review:create' %}" class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700">
+      + 리뷰 작성
+    </a>
+    {% endif %}
+  </div>
+
+  <ul class="space-y-4">
+    {% for review in review_list %}
+    <a href="{% url 'review:detail' review.pk %}">
+        <li class="p-4 mt-2 mb-2 bg-white shadow rounded hover:shadow-md transition cursor-pointer">
+          <h2 class="text-xl font-semibold text-gray-800">{{ review.title }}</h2>
+          <p class="text-sm text-gray-500">{{ review.link }}</p>
+          <p class="text-xs text-gray-400">작성일: {{ review.created_at|date:"Y년 m월 d일" }}</p>
+        </li>
+      </a>
+      
+    {% empty %}
+      <p class="text-gray-500">아직 등록된 리뷰가 없습니다.</p>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

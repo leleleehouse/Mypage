@@ -1,0 +1,6 @@
+{% extends "pybo/base.html" %}
+{% block title %}{{ project.title }}{% endblock %}
+
+{% block content %}
+  {% include "components/detail_block.html" with title=project.title link=project.github_url content_html=description_html created_at=project.created_at back_url="pybo:index" create_url="pybo:create" update_url="pybo:update" update_pk=project.pk delete_url="pybo:delete" delete_pk=project.pk prev_url="pybo:detail" prev_pk=prev.pk next_url="pybo:detail" next_pk=next.pk extra_html=extra_html%}
+{% endblock %}
